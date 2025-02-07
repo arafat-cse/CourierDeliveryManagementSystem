@@ -1,0 +1,30 @@
+.container {
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(to right, #4a90e2, #9013fe);
+    position: fixed;
+    
+}
+.login-container {
+    max-width: 900px;
+    width: 100%;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    
+}
+.login-image {
+    background: url('../assets/images/courier.jpg') no-repeat center center;
+    background-size: cover;
+}
+.login-form {
+    padding: 40px;
+}

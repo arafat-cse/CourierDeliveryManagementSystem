@@ -1,0 +1,19 @@
+.container {
+    /* max-width: 900px; */
+    margin: 0 auto;
+  }
+  
+  .table thead th {
+    background-color: #007bff;
+    color: white;
+  }
+  
+  .table tbody tr:hover {
+    background-color: #f5f5f5;
+  }
+  
+  .badge {
+    padding: 5px 10px;
+    font-size: 12px;
+  }
+  

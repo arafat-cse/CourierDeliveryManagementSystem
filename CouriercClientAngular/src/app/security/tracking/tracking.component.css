@@ -1,0 +1,15 @@
+.container {
+    max-width: 800px;
+    margin: 20px auto;
+  }
+  
+  .input-group {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .alert {
+    margin-top: 10px;
+    font-size: 18px;
+  }
+  

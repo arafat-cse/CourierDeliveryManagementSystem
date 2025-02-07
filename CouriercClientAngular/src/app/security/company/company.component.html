@@ -1,0 +1,76 @@
+
+<a href="javascript:void(0)" *ngIf="!isList;" (click)="isList=true;reset()" class="btn-list"> List</a>
+<a href="javascript:void(0)" *ngIf="isList" (click)="isList=false;reset();get()" class="btn-new">New</a>
+
+<div *ngIf="isList">
+    <div class="row">
+        <div class="col-lg-4">
+            Show
+            <select style="width: 50px;height: 32px;" [(ngModel)]="pageSize" (change)="search()">
+                <option *ngFor="let item of listPageSize" value={{item}}>
+                    {{item}}
+                </option>
+            </select>
+            records
+        </div>
+        <div class="col-lg-4">
+            <h4 class="text-center">Company Information</h4>
+        </div>
+    </div>
+    <table class="table table-bordered table-striped table-hover">
+        <thead class="table-primary">
+            <tr>
+                <th>Company Name</th>
+                <th>Created By</th>
+                <th>#</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of listCompany">
+                <td>{{item.companyName}}</td>
+                <td>{{item.createBy}}</td>
+                <td>
+                    <button class="btn btn-sm btn-outline-primary" (click)="edit(item)">Edit</button>
+                    <button class="btn btn-sm btn-outline-primary" (click)="removeConfirm(item)" data-bs-toggle="modal" data-bs-target="#confirmModal">Delete</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div *ngIf="!isList">
+    <h4 class="text-center">Company Entry Form</h4>
+    <div class="row g-3">
+        <div class="col-md-4">
+            <label class="form-label" for="CompanyName">Company Name:</label>
+            <input type="text" id="CompanyName" [(ngModel)]="Company.companyName" class="form-control" />
+        </div>
+        <div class="col-md-12 mt-5">
+            <!-- <button type="button" class="btn btn-success" *ngIf="Company.CompanyId>0 && authService.UserInfo.Menu.CanEdit" (click)="update();">update</button> -->
+            <button type="button" class="btn btn-secondary" *ngIf="Company.companyId>0" (click)="update();">Update</button>
+           <!-- <button type="button" class="btn btn-primary" *ngIf="Company.companyId==0" (click)="add();">Add</button> -->
+           <button type="button" class="btn btn-primary" *ngIf="Company.companyId==0" (click)="add()">Add</button>
+
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-primary">Are you sure to remove?</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-danger">
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal"
+                    (click)="reset();">No</button>/
+                <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal"
+                    (click)="remove(Company)">Yes</button>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

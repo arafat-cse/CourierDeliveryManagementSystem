@@ -1,0 +1,226 @@
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+<!-- * * * * * * * * * * * The content below * * * * * * * * * * * -->
+<!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * -->
+<!-- * * * * * * * * * * and can be replaced. * * * * * * * * * * * -->
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+<!-- * * * * * * * * * Delete the template below * * * * * * * * * * -->
+<!-- * * * * * * * to get started with your project! * * * * * * * * -->
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+
+<style>
+  .blink {
+    animation: blink-animation 1s steps(5, start) infinite;
+    -webkit-animation: blink-animation 1s steps(5, start) infinite;
+  }
+  @keyframes blink-animation {
+    to {
+      visibility: hidden;
+    }
+  }
+  @-webkit-keyframes blink-animation {
+    to {
+      visibility: hidden;
+    }
+  }
+</style>
+
+
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+<!-- * * * * * * * * * * * The content above * * * * * * * * * * * -->
+<!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * -->
+<!-- * * * * * * * * * * and can be replaced. * * * * * * * * * * * -->
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+<!-- * * * * * * * * * * End of Placeholder * * * * * * * * * * * -->
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+
+<div class="container-fluid " >
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark top-navigation" style="z-index: 100000;">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="javascript:void(0);">
+      <!-- <i class="fa fa-car"></i>  -->
+      <!-- <img src="/assets/img/logo.png" /> -->
+      {{title}}
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a *ngIf="authService.UserInfo.IsLogIn" class="nav-link" aria-current="page" routerLink="/dashboard"><i class="fa fa-home"></i> Home</a>
+        </li>
+
+
+ <li class="nav-item">
+          <a *ngIf="authService.UserInfo.IsLogIn" class="nav-link" aria-current="page" routerLink="/parcel"><i class="fa fa-plus"></i> Add Parcel</a>
+        </li>
+<li class="nav-item dropdown" *ngIf="authService.UserInfo.IsLogIn">
+  <a class="nav-link dropdown-toggle" href="javascript:void(0)" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <i class="fa fa-gear" aria-hidden="true"></i> Configuration
+  </a>
+  <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+    <li><a class="dropdown-item" routerLink="/company"><i class="fa fa-briefcase" aria-hidden="true"></i> Company</a></li>
+    <li><a class="dropdown-item" routerLink="/branch"><i class="fa fa-briefcase" aria-hidden="true"></i> Branch</a></li>
+    <li><a class="dropdown-item" routerLink="/parcel-type"><i class="fa fa-briefcase" aria-hidden="true"></i> Parcel Type</a></li>
+
+    <!-- <li><a class="dropdown-item" routerLink="/designation"><i class="fa fa-briefcase" aria-hidden="true"></i> Designation</a></li>
+    <li><a class="dropdown-item" routerLink="/parcel"><i class="fa fa-briefcase" aria-hidden="true"></i> Parcel</a></li>
+    <li><a class="dropdown-item" routerLink="/receiver"><i class="fa fa-briefcase" aria-hidden="true"></i> Receiver</a></li> -->
+  </ul>
+</li>
+        
+
+        <!-- <li class="nav-item dropdown" *ngFor="let item of authService.UserInfo.ModuleMenus">
+    <a *ngIf="item.ModuleName" class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+      <i class="{{item.ModuleIcon}}" aria-hidden="true"></i> {{item.ModuleName}}
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+      <li *ngFor="let m of item.Menus">
+        <a class="dropdown-item" routerLink="{{m.MenuPath}}"><i class="{{m.MenuIcon}}" aria-hidden="true"></i> {{m.MenuName}}</a>
+      </li>
+    </ul>
+  </li> -->
+      </ul>
+      <form class="d-flex align-items-center">
+        <button *ngIf="authService.UserInfo.IsLogIn" title="Notification here" type="button" class="border rounded-circle position-relative  me-4" >
+          <!-- <i class="fa-solid fa-location-dot fs-5 pt-1 text-primary"></i> -->
+          
+            <a *ngIf="authService.UserInfo.IsLogIn" class="nav-link" aria-current="page" routerLink="/tracking">  <i class="fa-solid fa-arrow-trend-up fs-5 p-1 text-primary"></i></a>
+         
+          <span class="position-absolute top-0 start-100 translate-middle badge  rounded-pill bg-danger ">
+          
+            <!-- <li class="nav-item">
+              <a *ngIf="authService.UserInfo.IsLogIn" class="nav-link" aria-current="page" routerLink="/dashboard"><i class="fa fa-home"></i> Home</a>
+            </li> -->
+          </span>
+        </button>
+        <!-- <button *ngIf="authService.UserInfo.IsLogIn" title="Notification here" type="button" class="border rounded-circle position-relative  me-4" >
+          <i class="fa-solid fa-bell fs-5 pt-1 text-primary"></i>
+          <span class="position-absolute top-0 start-100 translate-middle badge  rounded-pill bg-danger ">
+            9+
+            <span class="visually-hidden">unread messages</span>
+          </span>
+        </button> -->
+        <a class="btn btn-sm btn-outline-primary me-2" href="javascript:void(0)" *ngIf="authService.UserInfo.IsLogIn"><samp class="text-warning">User!</samp>  {{authService.UserInfo.UserName}}</a>
+        <button class="btn btn-sm btn-outline-info" type="button" (click)="logout()" *ngIf="authService.UserInfo.IsLogIn">Logout</button>
+        <button class="btn btn-sm btn-outline-success" type="button" (click)="login()" *ngIf="!authService.UserInfo.IsLogIn" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Login</button>
+       
+        <!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+          Launch demo modal
+        </button> -->
+      </form>
+    </div>
+  </div>
+</nav>
+<div class="sidebar" *ngIf="authService.UserInfo.IsLogIn">
+  <!-- <h4>Navigation</h4> -->
+  <!-- <a *ngIf="authService.UserInfo.IsLogIn" href="#"><i class="fa fa-home" routerLink="/dashboard"></i> Dashboard</a> -->
+  <!-- <li class="nav-item">
+    <a *ngIf="authService.UserInfo.IsLogIn" class="nav-link" aria-current="page" routerLink="/dashboard"><i class="fa fa-home"></i> Dashboard</a>
+  </li> -->
+  <a *ngIf="authService.UserInfo.IsLogIn" class="nav-link fs-6 " aria-current="page" routerLink="/dashboard"><i class="fa fa-home"></i> Dashboard</a>
+  <div>
+    <div class="dropdown fs-6">
+      <a class="nav-link dropdown-toggle" href="javascript:void(0)" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+        <i class="fa-solid fa-box"></i> Parcel
+      </a>
+      <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+        <li><a class="dropdown-item" routerLink="/parcel"><i class="fa fa-plus"></i> Parcel</a></li>
+        <!-- <li><a class="dropdown-item" routerLink="/parcel"><i class="fa fa-list"></i> Parcel List</a></li> -->
+      </ul>
+  </div>
+   <div class="dropdown fs-6">
+    <a class="nav-link dropdown-toggle" href="javascript:void(0)" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+      <i class="fa-solid fa-code-branch"></i> Branch
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+      <li><a class="dropdown-item" routerLink="/branch"><i class="fa fa-plus"></i> Branch</a></li>
+      <!-- <li><a class="dropdown-item" routerLink="/branch"><i class="fa fa-list"></i> Branch List</a></li> -->
+    </ul>
+  </div>
+  <div class="dropdown fs-6">
+    <a class="nav-link dropdown-toggle" href="javascript:void(0)" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <i class="fa fa-users icon"></i> Staff
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+      <li><a class="dropdown-item" routerLink="/staff"><i class="fa fa-plus"></i> Staff</a></li>
+      <!-- <li><a class="dropdown-item" routerLink="/staff"><i class="fa fa-list"></i> Staff List</a></li> -->
+    </ul>
+  </div>
+  <div class="dropdown fs-6">
+    <a class="nav-link dropdown-toggle" href="javascript:void(0)" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+      <i class="fa-solid fa-location-pin"></i> Designation
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+      <li><a class="dropdown-item" routerLink="/designation"><i class="fa fa-plus"></i> Designation</a></li>
+      <!-- <li><a class="dropdown-item" routerLink="/designation"><i class="fa fa-list"></i> Designation List</a></li> -->
+    </ul>
+  </div>
+  <div class="dropdown fs-6">
+    <a class="nav-link dropdown-toggle" href="javascript:void(0)" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+     <i class="fa-solid fa-tape"></i> Parcel Type
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+      <li><a class="dropdown-item" routerLink="/parcel-type"><i class="fa fa-plus"></i> Parcel Type</a></li>
+      <!-- <li><a class="dropdown-item" routerLink="/parcel-type"><i class="fa fa-list"></i> Parcel Type List</a></li> -->
+
+      <!-- <li><a class="dropdown-item" routerLink="/Parcel"><i class="fa fa-plus"></i> Add Parcel</a></li>
+      <li><a class="dropdown-item" routerLink="/delivery-charge"><i class="fa fa-plus"></i> Add delivery-charge</a></li>
+      <li><a class="dropdown-item" routerLink="/parcel"><i class="fa fa-list"></i> Parcel List</a></li>
+      <li><a class="dropdown-item" routerLink="/branch"><i class="fa fa-briefcase"></i> Branch</a></li> -->
+    </ul>
+  </div>
+   <div class="dropdown fs-6">
+       <a class="nav-link dropdown-toggle" href="javascript:void(0)" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+        <i class="fa-brands fa-ethereum"></i> Other
+       </a>
+       <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+         <!-- <li><a class="dropdown-item" routerLink="/staff"><i class="fa fa-plus"></i> Staff</a></li> -->
+         
+       <li><a class="dropdown-item" routerLink="/van"><i class="fa fa-plus"></i> van</a></li>
+         <li><a class="dropdown-item" routerLink="/branch"><i class="fa fa-plus"></i> Branch</a></li>         <!-- <li><a class="dropdown-item" routerLink="/vans"><i class="fa fa-plus"></i> Branch</a></li> -->
+       </ul>
+  </div>
+ <div class="dropdown fs-6">
+  <a routerLink="/dashboard"><i class="fa fa-file-alt "></i> Report</a>
+  <!-- <a routerLink="#"><i class="fa fa-th"></i> Grid</a> -->
+ </div>
+  
+  </div>
+  <div class="dropdown fs-6">
+    <a routerLink="#"><i class="fa fa-cogs "></i> Settings</a>
+  </div>
+
+  
+  <div class="fixed-bottom mb-2 d-flex justify-content-center" style="width: 220px;">
+    <button title="Notification here" type="button" class="border rounded-circle position-relative  me-4" >
+      <i class="fa-regular fa-comment fs-5 pt-1 text-primary"></i>
+      <span class="position-absolute top-0 start-100 translate-middle badge  rounded-pill bg-warning ">
+        5
+        <span class="visually-hidden">unread messages</span>
+      </span>
+    </button>
+    <button title="Notification here" type="button" class="border rounded-circle position-relative  me-4" >
+      <i class="fa-regular fa-envelope fs-5 pt-1 text-primary"></i>
+      <span class="position-absolute top-0 start-100 translate-middle badge  rounded-pill bg-warning ">
+        1
+        <span class="visually-hidden">unread messages</span>
+      </span>
+    </button>
+    <button title="Notification here" type="button" class="border rounded-circle position-relative  me-4" >
+      <i class="fa-solid fa-bell fs-5 pt-1 text-primary"></i>
+      <span class="position-absolute top-0 start-100 translate-middle badge  rounded-pill bg-danger ">
+        9+
+        <span class="visually-hidden">unread messages</span>
+      </span>
+    </button>
+  </div>
+</div>
+
+ <div class="content">
+  <router-outlet></router-outlet> 
+
+</div>
+
+
+</div>

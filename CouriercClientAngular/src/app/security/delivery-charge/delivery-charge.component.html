@@ -1,0 +1,84 @@
+<!-- <div class="container">
+    <h2>Parcel Delivery System</h2>
+    <div class="container mt-4">
+      <h4 class="text-center">Add Delivery Charge</h4>
+      <div class="row g-3"> -->
+        <!-- Dropdown for Parcel Type -->
+        <!-- <div class="col-md-6">
+          <label for="parcelTypeDropdown" class="form-label">Select Parcel Type:</label>
+          <select id="parcelTypeDropdown" [(ngModel)]="selectedParcelTypeId" class="form-select">
+            <option value="0" disabled>Select Parcel Type</option>
+            <option *ngFor="let parcelType of listParcelType" [value]="parcelType.parcelTypeId">
+              {{ parcelType.parcelTypeName }}
+            </option>
+          </select>
+        </div>
+   -->
+        <!-- Input for Delivery Charge -->
+        <!-- <div class="col-md-6">
+          <label for="deliveryChargeInput" class="form-label">Delivery Charge:</label>
+          <input 
+            type="number" 
+            id="deliveryChargeInput" 
+            [(ngModel)]="saveDeliveryCharge" 
+            class="form-control" 
+            placeholder="Enter Delivery Charge" />
+        </div> -->
+        <!-- Calculate Price Section -->
+        <!-- <div class="mt-4">
+            <h4 class="text-center">Calculate Price</h4>
+            <div class="row g-3"> -->
+            <!-- Dropdown for Weight -->
+            <!-- <div class="col-md-6">
+                <label for="weightDropdown" class="form-label">Weight (in KG):</label>
+                <select id="weightDropdown" [(ngModel)]="selectedWeight" class="form-select" (change)="calculatePrice()">
+                <option value="0" disabled>Select Weight</option>
+                <option *ngFor="let weight of weightList" [value]="weight">
+                    {{ weight }} KG
+                </option>
+                </select>
+            </div> -->
+
+      <!-- Display Calculated Price -->
+      <!-- <div class="col-md-6 d-flex align-items-center">
+        <p class="mb-0">
+          <strong *ngIf="calculatedPrice > 0">Price: {{ calculatedPrice }} BDT</strong>
+        </p>
+      </div>
+    </div>
+  </div>
+
+       -->
+  
+   
+  
+    <!-- Navigation Buttons -->
+    <!-- <div class="text-center mt-4">
+      <button class="btn btn-success me-2" (click)="saveDeliveryCharge()">Save</button>
+      <button class="btn btn-secondary" (click)="goToNextPage()">Next</button>
+    </div>
+
+   -->
+
+
+ 
+   <select id="parcelTypeDropdown" [(ngModel)]="selectedParcelTypeId" class="form-select">
+    <option value="0" disabled>Select Parcel Type</option>
+    <option *ngFor="let parcelType of listParcelType" [value]="parcelType.parcelTypeId">
+      {{ parcelType.parcelTypeName }}
+    </option>
+  </select>
+  <select id="weightDropdown" [(ngModel)]="selectedWeight" class="form-select" (change)="calculatePrice()">
+    <option value="0" disabled>Select Weight</option>
+    <option *ngFor="let weight of weightList" [value]="weight">
+      {{ weight }} KG
+    </option>
+
+  </select>
+  <p class="mb-0">
+    <strong *ngIf="calculatedPrice > 0">Price: {{ calculatedPrice }} BDT</strong>
+  </p>
+  
+
+  <button class="btn btn-success me-2" (click)="saveDeliveryCharge()">Save</button>
+<button class="btn btn-secondary" (click)="goToNextPage()">Next</button> 

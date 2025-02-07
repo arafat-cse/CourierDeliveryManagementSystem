@@ -1,0 +1,67 @@
+
+<!-- Navigation Links -->
+<a href="javascript:void(0)" *ngIf="!isList" (click)="isList=true;reset()" class="btn-list">List</a>
+<a href="javascript:void(0)" *ngIf="isList" (click)="isList=false;reset()" class="btn-new">New</a>
+
+<!-- Receiver List View -->
+<div *ngIf="isList">
+    <div class="row">
+        <div class="col-lg-4">
+            Show
+            <select style="width: 50px; height: 32px;" [(ngModel)]="pageSize" (change)="search()">
+                <option *ngFor="let size of listPageSize" [value]="size">
+                    {{size}}
+                </option>
+            </select>
+            records
+        </div>
+        <div class="col-lg-4">
+            <h4 class="text-center">Receiver Information</h4>
+        </div>
+    </div>
+
+    <table class="table table-bordered table-striped table-hover">
+        <thead class="table-primary">
+            <tr>
+                <th>Name</th>
+                <th>Phone Number</th>
+                <th>Email</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let receiver of listReceiver">
+                <td>{{receiver.receiverName}}</td>
+                <td>{{receiver.receiverPhoneNumber}}</td>
+                <td>{{receiver.receiverGmail}}</td>
+                <td>
+                    <button class="btn btn-sm btn-outline-primary" (click)="edit(receiver)">Edit</button>
+                    <button class="btn btn-sm btn-outline-danger" (click)="removeConfirm(receiver)" data-bs-toggle="modal" data-bs-target="#confirmModal">Delete</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- Receiver Entry Form View -->
+<div *ngIf="!isList">
+    <h4 class="text-center">Receiver Entry Form</h4>
+    <div class="row g-3">
+        <div class="col-md-6">
+            <label for="receiverName" class="form-label">Name:</label>
+            <input type="text" id="receiverName" [(ngModel)]="receiver.receiverName" class="form-control" />
+        </div>
+        <div class="col-md-6">
+            <label for="receiverPhoneNumber" class="form-label">Phone Number:</label>
+            <input type="text" id="receiverPhoneNumber" [(ngModel)]="receiver.receiverPhoneNumber" class="form-control" />
+        </div>
+        <div class="col-md-6">
+            <label for="receiverGmail" class="form-label">Email:</label>
+            <input type="email" id="receiverGmail" [(ngModel)]="receiver.receiverGmail" class="form-control" />
+        </div>
+        <div class="col-md-12 mt-5">
+            <button type="button" class="btn btn-secondary" *ngIf="receiver.receiverId > 0" (click)="update()">Update</button>
+            <button type="button" class="btn btn-primary" *ngIf="receiver.receiverId === 0" (click)="add()">Add</button>
+        </div>
+    </div>
+</div>

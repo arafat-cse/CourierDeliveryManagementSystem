@@ -1,0 +1,6 @@
+@WebCourierAPI_HostAddress = http://localhost:5037
+
+GET {{WebCourierAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

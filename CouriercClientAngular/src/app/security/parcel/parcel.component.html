@@ -1,0 +1,623 @@
+<a  href="javascript:void(0)" *ngIf="!isList;" (click)="isList=true;reset()" class="btn-list btn btn-primary" >List</a>
+<a href="javascript:void(0)" *ngIf="isList" (click)="isList=false;reset();getParcel()" class="btn-new btn btn-warning mb-4 px-5">New</a>
+
+<div *ngIf="isList">
+  
+  <div class="row">
+      <div class="col-lg-4">
+        Show
+        <!-- {{pagedItems|json}} -->
+        <select style="width: 50px;height: 32px;" [(ngModel)]="pageSize" (change)="search()">
+            <option *ngFor="let item of listPageSize" value={{item}}>
+                {{item}}
+            </option>
+        </select>
+        records
+    </div>
+      <div class="col-lg-4">
+          <h4 class="text-center text-uppercase text-primary">Parcel Information</h4>
+      </div>
+  </div>
+  <table class="table table-bordered table-striped table-hover">
+      <thead class="table-primary">
+          <tr>
+              <th>sl</th>
+              <th class="text-center">Tranking Code</th>
+              <!-- <th class="text-center">sendingBranch</th> -->
+              <!-- <th class="text-center">percelSendingDestribution</th> -->
+              <th class="text-center">Sender Name</th>
+              <th class="text-center">Sender Phone</th>
+              <th class="text-center">Recevar Name</th>
+              <th class="text-center">Recevar Phone</th>
+              <th class="text-center">Sender Branch Name</th>
+              <th class="text-center">Recevar Branch Name</th>
+              <th class="text-center">IsPaid</th>
+              <th class="text-center">Price </th>
+              <th class="text-center">ParcelType</th>
+              <th class="text-center">Active / Inactive</th>
+              <th class="text-center">Action</th>
+          </tr>
+      </thead>
+      <tbody> 
+          
+          <tr *ngFor="let item of pagedItems let i = index">
+            <td>{{ pageIndex * pageSize + i + 1 }}</td>
+              <td>{{item.trackingCode}}</td>
+              <!-- <td class="text-center">
+                <span class="badge px-3 py-2" [ngClass]="{'bg-success': item.sendingBranch, 'bg-danger': !item.sendingBranch}">
+                    {{item.sendingBranch ? 'YES' : 'NO'}}
+                </span>
+              </td> -->
+              <!-- <td class="text-center">
+                <button
+                  class="btn btn-sm"
+                  [ngClass]="{'btn-success': item.sendingBranch, 'btn-danger': !item.sendingBranch}"
+                  (click)="toggleSendingBranch(item)">
+                  {{ item.sendingBranch ? 'Yes' : 'NO' }}
+                </button>
+              </td> -->
+              <!-- <td class="text-center">
+                <span class="badge px-3 py-2" [ngClass]="{'bg-success': item.percelSendingDestribution, 'bg-danger': !item.percelSendingDestribution}">
+                    {{item.percelSendingDestribution ? 'YES' : 'NO'}}
+                </span>
+              </td> -->
+              <td class="text-center">{{item.senderName}}</td>
+              <td class="text-center">{{item.senderPhone}}</td>
+              <td class="text-center">{{item.receiverName}}</td>
+              <td class="text-center">{{item.receiverPhone}}</td>
+              <!-- <td class="text-center">{{item.senderBranchId}}</td> -->
+              <td>{{ getBranchName(item.senderBranchId) }}</td>
+              <!-- <td class="text-center">{{item.receiverBranchId}}</td> -->
+              <td>{{ getBranchName(item.receiverBranchId) }}</td>
+
+              <!-- <td class="text-center ">{{item.isPaid}}</td> -->
+              <td class="text-center">
+                <span class="badge px-3 py-2" [ngClass]="{'bg-success': item.isPaid, 'bg-danger': !item.isPaid}">
+                    {{item.isPaid ? 'YES' : 'NO'}}
+                </span>
+            </td>
+            <td class="text-center">{{item.price}}</td>
+          
+            <!-- <td class="text-center">{{item.parcelTypeId}}</td> -->
+            <td>{{ getParcelTypeName(item.parcelTypeId) }}</td>
+
+              <td class="text-center">
+                  <span class="badge px-3 py-2" [ngClass]="{'bg-success': item.isActive, 'bg-danger': !item.isActive}">
+                      {{item.isActive ? 'Active' : 'Inactive'}}
+                  </span>
+              </td>
+              <td >
+                <!-- <button viewModal class="btn btn-sm btn-outline-primary text-primary me-2 px-3"  data-bs-toggle="modal" data-bs-target="#viewModal" >
+                  <i class="fas fa-eye me-2"></i> View
+                </button>
+                 -->
+                <button viewModal class="btn btn-sm btn-outline-primary text-primary me-2 px-3" data-bs-toggle="modal" data-bs-target="#viewModal" (click)="selectParcel(item)">
+                 <i class="fas fa-eye me-2"></i> View
+               </button>
+               
+              
+               
+                <!-- <div class="modal fade" id="viewModal" tabindex="-1" aria-labelledby="viewModalLabel" aria-hidden="true">
+                  <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="viewModalLabel">View Details</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                        <app-view ></app-view>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                 -->
+                <!-- <button class="btn btn-sm btn-outline-primary text-primary me-2 px-3" (click)="view(item)"><i class="fas fa-eye me-2"></i> View</button> -->
+                <!-- <button class="btn btn-sm btn-outline-primary text-primary me-2 px-3" ><i class="fas fa-eye me-2"></i> View</button> -->
+                <button class="btn btn-sm btn-outline-warning text-primary" (click)="edit(item)"> <i class="fas fa-edit"></i> </button>
+                <button class="btn btn-sm btn-outline-danger" (click)="removeConfirm(item)"data-bs-toggle="modal"data-bs-target="#confirmModal"><i class="fas fa-trash-alt"></i></button>
+              </td>
+              
+              <!-- <td class="text-center">
+                  <button class="btn btn-sm btn-outline-warning text-primary me-2 px-3" (click)="edit(item)">Edit</button>
+                  <button class="btn btn-sm btn-outline-danger px-3" (click)="removeConfirm(item)" data-bs-toggle="modal" data-bs-target="#confirmModal">Delete</button>
+              </td> -->
+          </tr>
+      </tbody>
+  </table>
+</div>
+<!-- ---------------------------------Model-------------------------------  -->
+<div class="modal fade" id="viewModal" tabindex="-1" aria-labelledby="viewModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="viewModalLabel">Parcel Details</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <section class="container py-3">
+          <h2 class="mb-4 text-center courier-title ">TrackingCode: <h1 class="text-primary">{{selectedParcel?.trackingCode}}</h1></h2>
+          
+          <!-- Cards -->
+          <div class="row g-4">
+            <!-- Card 1 -->
+            <div class="col-md-6 col-lg-6">
+              <div class="card p-4  shadow-sm">
+                <div>
+                  <table class="table">
+                      <thead >
+                        <tr>
+                          <th>Sender Name: </th>
+                          <td>{{selectedParcel?.senderName}}</td>
+                        </tr>
+                        <tr>
+                          <th>Sender Phone: </th>
+                          <td>{{selectedParcel?.senderPhone}}</td>
+                        </tr>
+                     
+                        <tr>
+                          <th >Sender Branch: </th>
+                          <td class="text-success"><strong>{{getBranchName(selectedParcel?.senderBranchId)}}</strong></td>
+                        </tr>
+                        <tr>
+                          <th>Parcel Type: </th>
+                          <td class="text-primary"><strong>{{getParcelTypeName(selectedParcel?.parcelTypeId)}}</strong></td>
+                        </tr>
+                     
+                      </thead>
+
+                  </table>
+                </div>
+              </div>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="col-md-6 col-lg-6">
+              <div class="card p-4 shadow-sm">
+                <div>
+                  <table class="table">
+                      <thead >
+                        <tr>
+                          <th>Receiver Name:</th>
+                          <td>{{selectedParcel?.receiverName}}</td>
+                        </tr>
+                        <tr>
+                          <th>Receiver Phone: </th>
+                          <td>{{selectedParcel?.receiverPhone}}</td>
+                        </tr>
+                          <tr>
+                            <th>Receiver E-mail:</th>
+                            <td>{{selectedParcel?.receiverEmail}}</td>
+                          </tr>
+                          <tr>
+                            <th>Receiver Branch:</th>
+                            <td class="text-success" ><strong>{{getBranchName(selectedParcel?.receiverBranchId)}}</strong></td>
+                          </tr>
+                      </thead>
+
+                  </table>
+                </div>
+              </div>
+            </div>
+              <!-- Card 3 -->
+              <div class="col-md-12 col-lg-12">
+                  <div class="card p-4 shadow-sm">
+                    <div class="row g-4">
+                      <!-- Card 4 -->
+                      <div class="col-md-12 col-lg-12">
+                          <div class="card p-4  shadow-sm">
+                              <div>
+                                  <table class="table text-primary">
+                                      <thead class="table-primary" >
+                                        <tr>
+                                          <th>EstimatedReceiveTime: </th>
+                                          <td>{{selectedParcel?.estimatedReceiveTime}}</td>
+                                        </tr> 
+                                        <tr>
+                                          <th>Weight: </th>
+                                          <td class="text-center" ><strong>{{selectedParcel?.weight}}</strong></td>
+                                        </tr> 
+                                        <tr>
+                                          <th>Price: </th>
+                                          <td class="text-center text-primary" ><strong>{{selectedParcel?.price}}</strong></td>
+                                        </tr> 
+                                        <tr>
+                                          <th>Is Paid: </th>
+                                          <td class="text-center"><strong>{{selectedParcel?.isPaid ? 'Yes' : 'No'}}</strong></td>
+                                        </tr>
+                                        <tr>
+                                          <th>Sending Parcel: </th>
+                                          <!-- <td><strong>{{selectedParcel?.SendingBranch ? 'Yes' : 'No'}}</strong></td> -->
+                                          <td class="text-center">
+                                            <button
+                                              class="btn btn-sm"
+                                              [ngClass]="{'btn-success': selectedParcel?.sendingBranch, 'btn-danger': !selectedParcel?.sendingBranch}"
+                                              (click)="toggleSendingBranch(selectedParcel)">
+                                              {{ selectedParcel?.sendingBranch ? 'sendingBranch' : 'YES' }}
+                                      
+                                            </button>
+                                          </td>
+                                        </tr>
+                                        <tr>
+                                          <th>PercelSendingDestribution: </th>
+                                          <td class="text-center">
+                                            <button
+                                              class="btn btn-sm"
+                                              [ngClass]="{'btn-success': selectedParcel?.percelSendingDestribution, 'btn-danger': !selectedParcel?.percelSendingDestribution}"
+                                              (click)="togglePercelSendingDestribution(selectedParcel)">
+                                              {{ selectedParcel?.percelSendingDestribution ? 'PercelSendingDestribution' : 'YES' }}
+                                            </button>
+                                          </td>
+                                        </tr>
+                                       <tr>
+                                          <th>RecebingDistributin: </th>
+                                          <td class="text-center">
+                                            <button
+                                              class="btn btn-sm"
+                                              [ngClass]="{'btn-success': selectedParcel?.recebingDistributin, 'btn-danger': !selectedParcel?.recebingDistributin}"
+                                              (click)="toggleRecebingDistributin(selectedParcel)">
+                                              {{ selectedParcel?.recebingDistributin ? 'Recebing Distributin' : 'YES' }}
+                                            </button>
+                                          </td>
+                                        </tr>
+                                        <tr>
+                                      <th>RecebingBranch: </th>
+                                          <td class="text-center">
+                                            <button
+                                              class="btn btn-sm"
+                                              [ngClass]="{'btn-success': selectedParcel?.recebingBranch, 'btn-danger': !selectedParcel?.recebingBranch}"
+                                              (click)="toggleRecebingBranch(selectedParcel)">
+                                              {{ selectedParcel?.recebingBranch ? 'Recebing Branch' : 'YES' }}
+                                            </button>
+                                          </td>
+                                        </tr>
+                                        <tr>
+                                          <th>RecebingReceber: </th>
+                                          <td class="text-center">
+                                            <button
+                                              class="btn btn-sm"
+                                              [ngClass]="{'btn-success': selectedParcel?.recebingReceber, 'btn-danger': !selectedParcel?.recebingReceber}"
+                                              (click)="toggleRecebingReceber(selectedParcel)">
+                                              {{ selectedParcel?.recebingReceber ? 'Recebing Receber' : 'YES' }}
+                                            </button>
+                                          </td>
+                                        </tr> 
+                                 
+                                        <tr>
+                                          <th>Status: </th>
+                                          <td class="text-center">{{selectedParcel?.isActive ? 'Active' : 'Inactive'}}</td>
+                                        </tr>
+                                      </thead> 
+                                  </table>
+                              </div>
+                          </div>
+                      </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="card p-4 shadow-sm">
+              <div class="row g-4">
+                
+                      <!-- Card 4 -->
+                  <div class="col-md-12 col-lg-12">
+                    <div class="card p-4  shadow-sm">
+                      <div>
+                        <table class="table">
+                          <thead class="table-primary" >
+                            <tr>
+                              <th>Description: </th>
+                              <td>{{selectedParcel?.status}}</td>
+                            </tr> 
+                            <tr>
+                              <th>ReceiveTime: </th>
+                              <td>{{selectedParcel?.receiveTime}}</td>
+                            </tr> 
+             
+                           
+                          </thead> 
+                      </table>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Card 5 -->
+                  <!-- <div class="col-md-6 col-lg-6">
+                    <div class="card p-4 text-center shadow-sm">
+                      <div>
+                        <h5>Revenue Generated</h5>
+                        <i class="fas fa-dollar-sign icon fs-1 text-danger"></i>
+                        
+                        
+                      </div>
+                    </div>
+                  </div> -->
+                  </div>
+            </div>
+            
+            <!-- <button class="btn btn-sm btn-outline-success text-warning me-2 px-3" 
+                    (click)="generatePDF(selectedParcel)">
+                    <i class="fas fa-file-pdf me-2"></i> Download Invoice
+            </button> -->
+            <button class="btn btn-sm btn-outline-success text-warning me-2 px-3" 
+                (click)="generatePDF(selectedParcel, 'download')">
+                <i class="fas fa-file-pdf me-2"></i> Download Invoice
+            </button>
+
+            <button class="btn btn-sm btn-outline-success text-warning me-2 px-3" 
+                (click)="generatePDF(selectedParcel, 'print')">
+                <i class="fas fa-file-pdf me-2"></i> Print Invoice 
+            </button>
+
+        </section>         
+         
+      </div>
+    </div>
+  </div>
+</div>
+<!-- ---------------------------------Model End-------------------------------  -->
+
+<div *ngIf="!isList">
+  <h4 class="text-center text-uppercase text-primary">Parcel Entry Form</h4>
+  <div class="row g-3">
+      <div hidden class="col-md-6">
+          <label for="trackingCode" class="form-label text-primary"> TrackingCode*</label>
+          <input type="text" id="trackingCode" class="form-control" [(ngModel)]="parcels.trackingCode" readonly />
+          <!-- <input type="text" id="trackingCode" [(ngModel)]="parcels.trackingCode" class="form-control" placeholder="Tracking Code"/> -->
+      </div>
+    
+      <div class="col-md-12 text-center ">
+        <label for="parcelType" class="form-label text-primary">Parcel Type*</label>
+        <select  id="parcelType" [(ngModel)]="parcels.parcelTypeId" (change)="updatePrice()"  class="form-select w-50 mx-auto" >
+          <ng-container *ngFor="let pt of parcelType">
+            <option  *ngIf="pt.isActive" [ngValue]="pt.parcelTypeId">
+              {{ pt.parcelTypeName }}
+            </option>
+          </ng-container>
+        </select>
+      </div>
+      <!-- <div class="col-md-6">
+        <label for="parcelType" class="form-label">Parcel Type:</label>
+        <select id="parcelType" [(ngModel)]="parcels.parcelTypeId" class="form-select" (change)="updatePrice()">
+          <option *ngFor="let pt of parcelType" [ngValue]="pt.parcelTypeId" >
+            {{ pt.parcelTypeName }}
+          </option>
+        </select>
+      </div> -->
+      
+      
+      <!-- {{ parcels.parcelTypeId }} -->
+      
+      <!-- Sender  -->
+      <div class="col-md-3">
+        <label for="senderName" class="form-label text-primary"> Sender Name*</label>
+        <input type="text" id="senderName" [(ngModel)]="parcels.senderName" class="form-control" placeholder="Sender Name"/>
+      </div>
+      <div class="col-md-3">
+        <label for="senderPhone" class="form-label text-primary"> Sender Phone*</label>
+        <input type="text" id="senderPhone" [(ngModel)]="parcels.senderPhone" class="form-control" placeholder="Sender Phone"/>
+      </div>
+      <!-- <div class="col-md-3">
+        <label for="senderBranchId" class="form-label"> Sender Zone:</label>
+        <input type="text" id="senderBranchId" [(ngModel)]="parcels.senderBranchId" class="form-control" />
+      </div> -->
+      <!-- <div class="col-md-3">
+        <label for="parcelType" class="form-label">Sender Zone</label>
+        <select id="parcelType" [(ngModel)]="parcels.senderBranchId" class="form-select">
+          <option *ngFor="let pt of listBranchs ">{{ pt.branchName }}</option>
+        </select>
+      </div>
+
+       <div class="col-md-3">
+        <label for="parcelType" class="form-label">Sender Chils</label>
+        <select id="parcelType" [(ngModel)]="parcels.senderBranchId" class="form-select">
+          <option *ngFor="let pt of listBranchs[5].childBranches ">{{ pt.childBranches }}</option>
+        </select>
+      </div> -->
+      <div class="col-md-3">
+        <label for="senderZone" class="form-label text-primary">Sender Zone*</label>
+        <select 
+          id="senderZone" 
+          [(ngModel)]="selectedParentBranch" 
+          (change)="onParentBranchChange()" 
+          class="form-select">
+          <!-- <option *ngFor="let branch of listBranchs" [ngValue]="branch.branchId">
+            {{ branch.branchName }}
+          </option> -->
+          <ng-container *ngFor="let branch of listBranchs" >
+            <option *ngIf="branch.parentId == null" [ngValue]="branch.branchId">
+              {{ branch.branchName }}
+            </option>
+          </ng-container>
+          
+        </select>
+      </div>
+      
+      <div class="col-md-3">
+        <label for="senderChild" class="form-label text-primary">Sender Child*</label>
+        <select id="senderChild" [(ngModel)]="parcels.senderBranchId" class="form-select">
+          <option *ngFor="let child of filteredChildBranches" [ngValue]="child.branchId">
+            {{ child.branchName }}
+          </option>
+        </select>
+      </div>
+      
+      
+      <!-- recevar  -->
+      <div class="col-md-3">
+        <label for="receiverName" class="form-label text-primary"> Recevar Name*</label>
+        <input type="text" id="receiverName" [(ngModel)]="parcels.receiverName" class="form-control" placeholder="Recevar Name" />
+      </div>
+      <div class="col-md-3">
+        <label for="receiverPhone" class="form-label text-primary"> Recevar Phone*</label>
+        <input type="text" id="receiverPhone" [(ngModel)]="parcels.receiverPhone" class="form-control" placeholder="Recevar Phone"/>
+      </div>
+      <!-- <div class="col-md-3">
+        <label for="receiverBranchId" class="form-label"> receiver Branch Phone:</label>
+        <input type="text" id="receiverBranchId" [(ngModel)]="parcels.receiverBranchId" class="form-control" />
+      </div>
+      <div class="col-md-3">
+        <label for="receiverBranchId" class="form-label"> receiver Branch Phone:</label>
+        <input type="text" id="receiverBranchId" [(ngModel)]="parcels.receiverBranchId" class="form-control" />
+      </div> -->
+      <div class="col-md-3">
+        <label for="senderZone" class="form-label text-primary">Recevar Zone*</label>
+        <select 
+          id="senderZone" 
+          [(ngModel)]="recevarSelectedParentBranch" 
+          (change)="recevarParentBranchChange()" 
+          class="form-select">
+          <ng-container *ngFor="let branch of listBranchs" >
+            <option *ngIf="branch.parentId == null" [ngValue]="branch.branchId">
+              {{ branch.branchName }}
+            </option>
+          </ng-container>
+          
+        </select>
+      </div>
+      
+      <!-- <div class="col-md-3">
+        <label for="senderZone" class="form-label text-primary">Recevar Zone*</label>
+        <select 
+          id="senderZone" 
+          [(ngModel)]="recevarSelectedParentBranch" 
+          (change)="recevarParentBranchChange()" 
+          class="form-select">
+          <option *ngFor="let branch of listBranchs" [ngValue]="branch">
+            {{ branch.branchName }}
+          </option>
+        </select>
+      </div> -->
+      
+      <!-- <div class="col-md-3">
+        <label for="senderChild" class="form-label text-primary">Recevar Child*</label>
+        <select id="senderChild" [(ngModel)]="parcels.receiverBranchId" class="form-select">
+          <option *ngFor="let child of recevarFilteredChildBranches" [ngValue]="child.branchId">
+            {{ child.branchName }}
+          </option>
+        </select>
+      </div> -->
+            
+      <div class="col-md-3">
+        <label for="senderChild" class="form-label text-primary">Recevar Child*</label>
+        <select id="senderChild" [(ngModel)]="parcels.receiverBranchId" class="form-select">
+          <option *ngFor="let child of recevarFilteredChildBranches" [ngValue]="child.branchId">
+            {{ child.branchName }}
+          </option>
+        </select>
+      </div>
+      <!-- Others  -->
+      <!-- <div class="col-md-2">
+        <label for="weight" class="form-label"> weight:</label>
+        <input type="text" id="weight" [(ngModel)]="parcels.weight" [defaultValue]="1" class="form-control" />
+      </div> -->
+      <!-- {{parcels.weight}} -->
+      <!-- <div class="col-md-2">
+        <label for="price" class="form-label"> price:</label>
+        <input readonly type="text" id="price" placeholder="{{(parcels.parcelTypeId == 1)? 40 : (parcels.parcelTypeId == 4)? 
+        '80':(parcels.parcelTypeId == 7)? '120': (parcels.parcelTypeId == 18)? '160': (parcels.parcelTypeId == 19)? '200': 0}}" class="form-control" />
+      </div> -->
+      <div class="col-md-4">
+        <label for="receiverEmail" class="form-label text-primary"> ReceiverEmail*</label>
+        <input type="text" id="receiverEmail" [(ngModel)]="parcels.receiverEmail" class="form-control" placeholder="Receiver Email"/>
+      </div>
+      <div class="col-md-4">
+        <label for="driverId" class="form-label text-primary"> Receiver-AlternativetoAddress:</label>
+        <input type="text" id="driverId" [(ngModel)]="parcels.receiverAlternativetoAddress" class="form-control" placeholder="Receiver Alternative Address"/>
+      </div>
+      <div class="col-md-4">
+        <label for="estimatedReceiveTime" class="form-label text-primary">Estimated Receive Time:</label>
+        <input type="datetime-local" id="estimatedReceiveTime" [(ngModel)]="parcels.estimatedReceiveTime" class="form-control" />
+      </div>
+    
+    
+      <div class="col-md-2">
+        <label for="weight" class="form-label text-primary">Weight:</label>
+        <input type="number" id="weight" [(ngModel)]="parcels.weight" class="form-control" (input)="updatePrice()" placeholder=" parcel weight"/>
+      </div>
+      
+      <!-- <div class="col-md-2">
+        <label for="price" class="form-label">Price:</label>
+        <input readonly type="text" id="price" [value]="price" class="form-control" />
+      </div> -->
+      <div class="col-md-2">
+        <label for="price" class="form-label text-primary ">Price Auto</label>
+        <input readonly type="text" id="price" [value]="price" [(ngModel)]="parcels.price" class="form-control bg-warning " />
+      </div>
+      <div class="col-md-2">
+        <label for="isPaid" class="form-label text-primary">isPaid:</label>
+        <select id="isPaid" [(ngModel)]="parcels.isPaid" class="form-select">
+            <option [ngValue]="true">Yes</option>
+            <option [ngValue]="false" selected="true">No</option>
+          </select>
+    </div>
+    <div class="col-md-2">
+      <label for="vans" class="form-label text-primary">Van</label>
+      <select id="vans" [(ngModel)]="parcels.vanId" class="form-select">
+        <ng-container *ngFor="let van of listVan" >
+        <option *ngIf="van.isActive" [ngValue]="van.VanId">
+          {{ van.registrationNo }}
+        </option>
+      </ng-container>
+      </select>
+    </div>
+
+      <!-- <div class="col-md-2">
+        <label for="vanId" class="form-label"> Van:</label>
+        <input type="text" id="vanId" [(ngModel)]="parcels.vanId" class="form-control" />
+      </div> -->
+      <div class="col-md-2">
+        <label for="driverId" class="form-label text-primary"> Driver:</label>
+        <input type="text" id="driverId" [(ngModel)]="parcels.driverId" class="form-control" />
+      </div>
+      <div class="col-md-2">
+        <label for="receiveTime" class="form-label text-primary">ReceiveTime:</label>
+        <input type="datetime-local" id="receiveTime" [(ngModel)]="parcels.receiveTime" class="form-control" />
+      </div>
+    
+
+
+      <div class="col-md-6">
+        <label for="driverId" class="form-label text-primary"> Description:</label>
+        <textarea type="text" id="driverId" [(ngModel)]="parcels.status" class="form-control" placeholder="Parcel Description" ></textarea>
+      </div>
+      <div class="col-md-6">
+          <label for="isActive" class="form-label text-primary">Is Active:</label>
+          <select id="isActive" [(ngModel)]="parcels.isActive" class="form-select">
+              <option [ngValue]="true">Active</option>
+              <option [ngValue]="false">Inactive</option>
+            </select>
+      </div>
+      <div class="col-md-12">
+        <label for="sendTime" class="form-label text-primary">sendTime:</label>
+        <input type="datetime-local" id="sendTime" [(ngModel)]="parcels.sendTime" class="form-control" />
+      </div>
+      <div class="col-md-12 mt-5">
+          <button type="button" class="btn btn-secondary" *ngIf="parcels.parcelId > 0" (click)="update()">Update</button>
+          <button type="button" class="btn btn-primary" *ngIf="parcels.parcelId === 0" (click)="add()">Add</button>
+      </div>
+  </div>
+</div>
+
+<div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title text-primary">Are you sure to remove?</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body text-danger">
+              <button type="button" class="btn btn-outline-secondary me-2" data-bs-dismiss="modal" (click)="reset()">No</button>
+              <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal" (click)="remove(parcels)">Yes</button>
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Close</button>
+          </div>
+      </div>
+  </div>
+</div>
+
+<!-- {{listBranchs | json}} --> 
+<div *ngIf="isList" class="mt-3">
+  <button class="btn btn-outline-secondary me-2" [disabled]="pageIndex === 0" (click)="prevPage()">Previous</button>
+  <button class="btn btn-outline-secondary" [disabled]="(pageIndex + 1) * pageSize >= Listparcels.length" (click)="nextPage()">Next</button>
+</div>

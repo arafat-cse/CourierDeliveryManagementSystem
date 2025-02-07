@@ -1,0 +1,89 @@
+<!-- Navigation Links -->
+<a href="javascript:void(0)" *ngIf="!isList" (click)="isList=true;reset()" class="btn-list">List</a>
+<a href="javascript:void(0)" *ngIf="isList" (click)="isList=false;reset()" class="btn-new">New</a>
+
+<!-- Bank List View -->
+<div *ngIf="isList">
+    <div class="row">
+        <div class="col-lg-4">
+            Show
+            <select style="width: 50px;height: 32px;" [(ngModel)]="pageSize" (change)="search()">
+                <option *ngFor="let size of listPageSize" [value]="size">
+                    {{size}}
+                </option>
+            </select>
+            records
+        </div>
+        <div class="col-lg-4">
+            <h4 class="text-center">Bank Information</h4>
+        </div>
+    </div>
+
+    <table class="table table-bordered table-striped table-hover">
+        <thead class="table-primary">
+            <tr>
+                <th>Branch Name</th>
+                <th>Address</th>
+                <th>Account No</th>
+                <th>Created By</th>
+                <th>Active/inActive</th>
+                <th>Action</th>
+            </tr>
+            
+        </thead>
+        <tbody>
+            <tr *ngFor="let bank of listBank">
+                <td>{{bank.branchName}}</td>
+                <td>{{bank.address}}</td>
+                <td>{{bank.accountNo}}</td>
+                <td>{{bank.isActive}}</td>
+                <td>{{bank.createBy}}</td>
+                <td></td>
+
+                <td>
+                    <button class="btn btn-sm btn-outline-primary" (click)="edit(bank)">Edit</button>
+                    <button class="btn btn-sm btn-outline-danger" (click)="removeConfirm(bank)" data-bs-toggle="modal" data-bs-target="#confirmModal">Delete</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<!-- Bank Entry Form View -->
+<div *ngIf="!isList">
+    <h4 class="text-center">Bank Entry Form</h4>
+    <div class="row g-3">
+        <div class="col-md-6">
+            <label for="branchName" class="form-label">Branch Name:</label>
+            <input type="text" id="branchName" [(ngModel)]="bank.branchName" class="form-control" />
+        </div>
+        <div class="col-md-6">
+            <label for="address" class="form-label">Address:</label>
+            <input type="text" id="address" [(ngModel)]="bank.address" class="form-control" />
+        </div>
+        <div class="col-md-6">
+            <label for="accountNo" class="form-label">Account No:</label>
+            <input type="text" id="accountNo" [(ngModel)]="bank.accountNo" class="form-control" />
+        </div>
+        <div class="col-md-6">
+            <label for="isActive" class="form-label">Is Active:</label>
+            <select id="isActive" [(ngModel)]="bank.isActive" class="form-select">
+                <option [ngValue]="true">Active</option>
+                <option [ngValue]="false">Inactive</option>
+            </select>
+        </div>
+
+        <div class="col-md-6">
+            <label for="companyId" class="form-label">Company:</label>
+            <select id="companyId" [(ngModel)]="bank.companyId" class="form-select">
+                <option *ngFor="let company of listCompany" [value]="company.companyId">
+                    {{ company.branchName }}
+                </option>
+            </select>
+        </div>
+        
+        <div class="col-md-12 mt-5">
+            <button type="button" class="btn btn-secondary" *ngIf="bank.bankId > 0" (click)="update()">Update</button>
+            <button type="button" class="btn btn-primary" *ngIf="bank.bankId === 0" (click)="add()">Add</button>
+        </div>
+    </div>
+</div>

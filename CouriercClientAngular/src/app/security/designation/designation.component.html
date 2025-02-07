@@ -1,0 +1,109 @@
+<a  href="javascript:void(0)" *ngIf="!isList;" (click)="isList=true;reset()" class="btn-list btn btn-primary" >List</a>
+<a href="javascript:void(0)" *ngIf="isList" (click)="isList=false;reset();get()" class="btn-new btn btn-warning mb-4 px-5">New</a>
+
+<div *ngIf="isList">
+    <div class="row">
+        <div class="col-lg-4">
+            Show
+            <select style="width: 50px;height: 32px;" [(ngModel)]="pageSize" (change)="search()">
+                <option *ngFor="let item of listPageSize" value={{item}}>
+                    {{item}}
+                </option>
+            </select>
+            records
+        </div>
+        <div class="col-lg-4">
+            <h4 class="text-center">Designation Information</h4>
+        </div>
+    </div>
+    <table class="table table-bordered table-striped table-hover">
+        <thead class="table-primary">
+            <tr>
+                <th>sl</th>
+                <th>Title Name</th>
+                <th class="text-center">SalaryRanage</th>
+                <th class="text-center">Created By</th>               
+                <th class="text-center">Update By</th>               
+                <th class="text-center">Active / Inactive</th>
+                <th class="text-center">Action</th>
+            </tr>
+        </thead>
+        <tbody> 
+            
+            <tr *ngFor="let item of listDesignation let i = index">
+                <td>{{i+1}}</td>
+                <td class="text-center">{{item.title}}</td>
+                <td class="text-center">{{item.salaryRange}}</td>
+                <td class="text-center">{{item.createBy}} </td>
+                <td class="text-center">{{item.updateBy}} </td>
+                <!-- <td class="text-center">
+                    <span class="badge px-3 py-2 w-50" [ngClass]="{'bg-success': item.isActive, 'bg-danger': !item.isActive}">
+                        {{item.isActive ? 'Active' : 'Inactive'}}
+                    </span>
+                </td> -->
+                <td class="text-center">
+                    <button
+                      class="btn btn-sm"
+                      [ngClass]="{'btn-success': item.isActive, 'btn-danger': !item.isActive}"
+                      (click)="toggleActive(item)">
+                      {{ item.isActive ? 'Active' : 'Inactive' }}
+                    </button>
+                  </td>
+                  
+                <!-- <td class="text-center">
+                    <input
+                      type="checkbox"
+                      [checked]="item.isActive"
+                      (change)="toggleActive(item)"
+                    />
+                  </td>
+                   -->
+                <td class="w-25 text-center">
+                    <button class="btn btn-sm btn-outline-warning text-primary me-2 px-3" (click)="edit(item)">Edit</button>
+                    <button class="btn btn-sm btn-outline-danger px-3" (click)="removeConfirm(item)" data-bs-toggle="modal" data-bs-target="#confirmModal">Delete</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div *ngIf="!isList">
+  <h4 class="text-center">Vans Entry Form</h4>
+  <div class="row g-3">
+      <div class="col-md-6">
+          <label for="parcelTypeName" class="form-label">Designation Title:</label>
+          <input type="text" id="parcelTypeName" [(ngModel)]="designation.title" class="form-control" />
+      </div>
+      <div class="col-md-6">
+        <label for="parcelTypeName" class="form-label">salaryRange Title:</label>
+        <input type="text" id="parcelTypeName" [(ngModel)]="designation.salaryRange" class="form-control" />
+    </div>
+      <div class="col-md-6">
+          <label for="isActive" class="form-label">Is Active:</label>
+          <select id="isActive" [(ngModel)]="designation.isActive" class="form-select">
+              <option [ngValue]="true">Active</option>
+              <option [ngValue]="false">Inactive</option>
+            </select>              
+      </div>
+      <div class="col-md-12 mt-5">
+          <button type="button" class="btn btn-secondary" *ngIf="designation.designationId > 0" (click)="update()">Update</button>
+          <button type="button" class="btn btn-primary" *ngIf="designation.designationId === 0" (click)="add()">Add</button>
+      </div>
+  </div>
+</div>
+<div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title text-primary">Are you sure to remove?</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body text-danger">
+              <button type="button" class="btn btn-outline-secondary me-2" data-bs-dismiss="modal" (click)="reset()">No</button>
+              <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal" (click)="remove(designation)">Yes</button>
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Close</button>
+          </div>
+      </div>
+  </div>
+</div>

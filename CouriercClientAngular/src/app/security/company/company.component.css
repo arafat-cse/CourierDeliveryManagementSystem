@@ -1,0 +1,36 @@
+.btn-list {
+    background-color: #007bff; /* নীল রঙ */
+    color: white;
+    padding: 5px 10px;
+    margin-top: 10px;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+.btn-new {
+    background-color: #28a745; /* সবুজ রঙ */
+    color: white;
+    padding: 5px 10px;
+    margin-top: 10px;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+.btn-list:hover, .btn-new:hover {
+    opacity: 0.8;
+    text-decoration: none;
+}
+
+/* table */
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: #f2f2f2; /* হালকা ধূসর রঙ */
+}
+
+.table-striped tbody tr:hover {
+    background-color: #d9edf7; /* হালকা নীল রঙ */
+}
+
+.table-primary th {
+    background-color: #007bff;
+    color: #fff;
+}

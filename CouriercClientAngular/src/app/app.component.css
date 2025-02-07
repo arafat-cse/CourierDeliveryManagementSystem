@@ -1,0 +1,106 @@
+/* .dropdown-menu a {
+    padding: 10px;
+    color: #ffffff;
+    background-color: #343a40;
+    
+  } */
+  /* .dropdown-menu{
+    background-color: #343a40;
+  } */
+
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f7fb;
+}
+.top-navigation{
+    position: fixed;
+    right: 0;
+    left: 0;
+}
+
+.sidebar {
+    width: 200px;
+    /* height: 100vh; */
+    position: fixed;
+    background-color: #343a40;
+    color: #fff;
+    padding: 20px 10px;
+    left: 0;
+    bottom: 0;
+    top: 52px;
+}
+
+.sidebar h4 {
+    color: #fff;
+    margin-bottom: 20px;
+}
+
+.sidebar a {
+    display: block;
+    color: #fff;
+    text-decoration: none;
+    padding: 10px;
+    margin-bottom: 5px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.sidebar a:hover {
+    background-color: #007bff;
+}
+
+.content {
+    margin-left: 200px;
+    padding: 20px;
+    padding-top: 80px;
+}
+
+.card {
+    border: none;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.card h5 {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.card .icon {
+    font-size: 2rem;
+    color: #007bff;
+}
+
+.chart-container {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+
+
+/* Dropdown menu links styling */
+.dropdown-menu a {
+    padding: 10px;
+    color: #ffffff;
+    background-color: #3f5163;
+    text-decoration: none;
+    display: block;
+    transition: background-color 0.3s ease;
+}
+
+.dropdown-menu a:hover {
+    background-color: #007bff; /* Hover effect for dropdown links */
+}
+
+/* Dropdown menu container styling */
+.dropdown-menu {
+    background-color: #ced1d4;
+    border: none;
+    border-radius: 4px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Optional shadow */
+    position: absolute;
+    z-index: 1050;
+}

@@ -1,0 +1,85 @@
+
+<div class="container">  
+    <div class="banner-section text-center text-white py-5" style="background: linear-gradient(to right, #007bff, #6610f2); border-radius: 10px;">
+      <h1 class="fw-bold">Track Your Parcel</h1>
+      <p class="lead">Enter your tracking code below to get the latest status</p>
+      
+      <div class="input-group mt-3 w-50 mx-auto">
+        <input
+        type="text"
+        class="form-control"
+        placeholder="Enter Tracking Code"
+        [(ngModel)]="trackingCode"
+      />
+      <button class="btn btn-primary" (click)="searchParcel()">Tracking</button>
+      </div>
+    </div>
+  
+    <div *ngIf="selectedParcel">
+      <h2 class="text-center text-black">Tracking Code: {{ selectedParcel?.trackingCode }}</h2>
+  
+      <div class="tracking-steps">
+        <div *ngIf="selectedParcel?.sendingBranch" class="alert alert-success">✅ Sending Branch Completed</div>
+        <div *ngIf="selectedParcel?.percelSendingDestribution" class="alert alert-success">✅ Parcel Sent to Distribution</div>
+        <div *ngIf="selectedParcel?.recebingDistributin" class="alert alert-success">✅ Received at Distribution</div>
+        <div *ngIf="selectedParcel?.recebingBranch" class="alert alert-success">✅ Received at Branch</div>
+        <div *ngIf="selectedParcel?.recebingReceber" class="alert alert-success">✅ Delivered to Receiver</div>
+      </div>
+    </div>
+  </div>
+<!--   
+<div class="container">
+    <h2 class="mb-4 text-center courier-title">Tracking Code Search</h2>
+  
+    <div class="input-group mb-3">
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Enter Tracking Code"
+        [(ngModel)]="trackingCode"
+      />
+      <button class="btn btn-primary" (click)="searchParcel()">Search</button>
+    </div>
+  
+    <div *ngIf="selectedParcel" class="tracking-status mt-4">
+      <h2 class="text-center text-primary">Tracking Code: {{ selectedParcel.trackingCode }}</h2>
+  
+      <div class="tracking-steps">
+        <div *ngIf="selectedParcel?.SendingBranch; else pending1" class="alert alert-success">
+          ✅ Sending Branch Completed
+        </div>
+        <ng-template #pending1>
+          <div class="alert alert-warning">⏳ Waiting for Sending Branch</div>
+        </ng-template>
+  
+        <div *ngIf="selectedParcel?.PercelSendingDestribution; else pending2" class="alert alert-success">
+          ✅ Parcel Sent to Distribution
+        </div>
+        <ng-template #pending2>
+          <div class="alert alert-warning">⏳ Waiting for Distribution</div>
+        </ng-template>
+  
+        <div *ngIf="selectedParcel?.RecebingBranch; else pending3" class="alert alert-success">
+          ✅ Received at Distribution
+        </div>
+        <ng-template #pending3>
+          <div class="alert alert-warning">⏳ Not Yet Received at Distribution</div>
+        </ng-template>
+  
+        <div *ngIf="selectedParcel?.RecebingBranch; else pending4" class="alert alert-success">
+          ✅ Received at Branch
+        </div>
+        <ng-template #pending4>
+          <div class="alert alert-warning">⏳ Waiting for Branch Arrival</div>
+        </ng-template>
+  
+        <div *ngIf="selectedParcel?.RecebingReceber; else pending5" class="alert alert-success">
+          ✅ Delivered to Receiver
+        </div>
+        <ng-template #pending5>
+          <div class="alert alert-danger">❌ Not Yet Delivered</div>
+        </ng-template>
+      </div>
+    </div>
+  </div> -->
+  

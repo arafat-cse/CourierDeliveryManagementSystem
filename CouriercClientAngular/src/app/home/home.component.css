@@ -1,0 +1,126 @@
+.imagecaver{
+    height: 500px;
+    width: 100pxS;
+    background: url('../assets/images/deliveryfont.png') no-repeat center center;
+    background-size:cover;
+    padding: 100px;
+   
+}
+
+
+.section-title {
+    text-align: center;
+    margin-bottom: 30px;
+  }
+.icon-round {
+    text-align: center;
+  } 
+  .icon-round {
+    text-align: center;
+    border: 1px solid #ddd;
+    border-radius: 50%;
+    padding: 60px;
+    min-width: 200px; 
+    max-width: 200px; 
+    height: 200px; 
+    padding: 30px; 
+    /* background-color:linear-gradient(  rgba, #007bff, #6610f2); */
+    background: linear-gradient(to right, rgba(0, 123, 255, .7), #6610f2);
+
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    line-height: 100px;
+    /* linear-gradient(to right, #007bff, #6610f2); */
+  }
+  .icon-round:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  }
+  .icon-round img {
+    max-width: 35px;
+    margin-bottom: 15px;
+  } 
+
+  h5{
+    color: white;
+    font-size: 20px;
+  }
+
+  .footer-container{
+    border-radius: 10px 10px 0 0;
+  }
+
+  .section-title {
+    text-align: center;
+    margin-bottom: 30px;
+  }
+.icon-box {
+    text-align: center;
+  } 
+  .icon-box {
+    text-align: center;
+    border: 1px solid #ddd;
+    border-radius: 50% 0 50% 0;
+    padding: 60px;
+    min-width: 200px; 
+    max-width: 200px; 
+    height: 200px; 
+    padding: 30px; 
+    /* background-color:linear-gradient(  rgba, #007bff, #6610f2); */
+    background: linear-gradient(to right, rgba(0, 123, 255, .7), #6610f2);
+
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    line-height: 100px;
+    /* linear-gradient(to right, #007bff, #6610f2); */
+  }
+  .icon-box {
+    transition: all 0.5s ease-in-out;
+}
+
+.icon-box:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    border-radius: 0 50% 0 50%;
+}
+
+  .icon-box img {
+    max-width: 35px;
+    margin-bottom: 15px;
+  } 
+  
+.Download-app img {
+    width: 100%;
+    /* background-image: url('../assets/images/tracking.jpg') no-repeat center center; */
+    background-size:contain;
+}
+
+/* .Download-app {
+    height: 500px;
+    width: 500px;
+}
+ */
+ section-title {
+    font-size: 2.5rem;
+    font-weight: 600;
+}
+
+ul {
+    font-size: 1.1rem;
+}
+
+ul li {
+    margin-bottom: 10px;
+}
+
+ul li i {
+    margin-right: 10px;
+}
+
+
+
+
+
+
+
+
+
+  
