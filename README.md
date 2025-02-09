@@ -1,6 +1,6 @@
 # Courier Delivery Management System
 
-![Courier Delivery](path/to/your/image.png)
+![Courier Delivery](CouriercClientAngular/src/app/assets/images/courier.jpg)
 
 ## Project Overview
 The **Courier Delivery Management System** streamlines courier operations by offering tools for parcel tracking, delivery management, and customer communication. This document provides an overview of the technologies used in both backend and frontend development.
@@ -97,12 +97,12 @@ The Courier Delivery Management System integrates **ASP.NET Core Web API** for a
 
 1. **Clone the repository:**  
    ```bash
-   git clone https://github.com/your-repo/courier-delivery-management-system.git
+   git clone https:https://github.com/arafat-cse/CourierDeliveryManagementSystem.git
    ```
 
 2. **Navigate to the project directory:**  
    ```bash
-   cd courier-delivery-management-system
+   cd CourierDeliveryManagementSystem
    ```
 
 3. **Setup Backend:**  
