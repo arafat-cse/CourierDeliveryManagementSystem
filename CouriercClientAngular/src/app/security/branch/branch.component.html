@@ -64,29 +64,7 @@
     </div>
 
     <div class="col-md-6">
-      <!-- <label for="parentDropdown" class="form-label">Parent Branch:</label>
-      <select id="parentDropdown" [(ngModel)]="branchs.ParentId" class="form-select">
-        <option value="0" disabled>Select Parent</option>
-        <option *ngFor="let branch of listBranchs" [value]="branch.BranchId">
-          {{ branch.BranchName }}
-        </option>
-      </select> -->
-      <!-- <div class="col-md-3">
-        <label for="senderZone" class="form-label text-primary">Sender Zone*</label>
-        <select 
-          id="senderZone" 
-          [(ngModel)]="selectedParentBranch" 
-          (change)="onParentBranchChange()" 
-          class="form-select">
-        
-          <ng-container *ngFor="let branch of listBranchs" >
-            <option *ngIf="branch.parentId == null" [ngValue]="branch.branchId">
-              {{ branch.branchName }}
-            </option>
-          </ng-container>
-          
-        </select>
-      </div> -->
+   
       <div>
         <label for="parentDropdown" class="form-label">Parent Branch:</label>
         <select  id="senderZone" [(ngModel)]="branchs.parentId" (change)="onParentBranchChange()" class="form-select"> 
@@ -99,20 +77,7 @@
       </select>
       </div>
       
-      <!-- <div>
-        <label for="parentDropdown" class="form-label">Parent Branch:</label>
-        <select id="parentDropdown" [(ngModel)]="branchs.parentId" class="form-select">
-          <option [value]="null" disabled>Select Parent</option>
-          <option *ngFor="let branch of dropdownBranches" [value]="branch.value">
-            {{ branch.label }}
-          </option>
-          <optgroup *ngFor="let branch of dropdownBranches" [label]="branch.label">
-            <option *ngFor="let child of branch.children" [value]="child.value">
-              {{ child.label }}
-            </option>
-          </optgroup>
-        </select>
-      </div> -->
+     
       
     </div>
     <div class="col-md-6">
@@ -136,23 +101,7 @@
   </div>
 </div>
 
-<!-- <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-sm">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title text-primary">Are you sure to remove?</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body text-danger">
-        <button type="button" class="btn btn-outline-secondary me-2" data-bs-dismiss="modal" (click)="reset()">No</button>
-        <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal" (click)="remove(selectedBranchId)">Yes</button>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div> -->
+
 <div *ngIf="isList" class="mt-3">
     <button class="btn btn-outline-secondary me-2" [disabled]="pageIndex === 0" (click)="prevPage()">Previous</button>
     <button class="btn btn-outline-secondary" [disabled]="(pageIndex + 1) * pageSize >= listBranchs.length" (click)="nextPage()">Next</button>

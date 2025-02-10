@@ -65,23 +65,7 @@ export class DesignationComponent implements OnInit {
   ngOnInit(): void {
     this.get();
   }
-  // get(): void {
-  //   const headers = new HttpHeaders({
-  //     'Token': this.authService.UserInfo?.Token || '',
-  //   });
 
-  //   this.httpClient.get<any>(`${this.authService.baseURL}/api/Designations`, { headers })
-  //     .subscribe({
-  //       next: (response) => {
-  //         this.listDesignation = response;
-  //       //  this.rowCount = response.totalCount || 0;
-  //         this.applyPaging();
-  //       },
-  //       error: () => {
-  //         this.showMessage('error', 'Failed to load parcel types');
-  //       },
-  //     });
-  // }
 
   get(): void {
     const headers = new HttpHeaders({

@@ -76,22 +76,7 @@ export class BankComponent implements OnInit {
     this.getCompanies();  // Fetch companies when the component initializes
   }
 
-  // get(): void {
-  //   const headers = new HttpHeaders({
-  //     'Token': this.authService.UserInfo?.Token || '',
-  //   });
 
-  //   this.httpClient.get<any>(`${this.authService.baseURL}/api/Banks`, { headers })
-  //     .subscribe({
-  //       next: (response) => {
-  //         this.listBank = response;
-  //         this.applyPaging();
-  //       },
-  //       error: () => {
-  //         this.showMessage('error', 'Failed to load banks');
-  //       },
-  //     });
-  // }
   get(): void {
     const headers = new HttpHeaders({
       'Token': this.authService.UserInfo?.Token || '',

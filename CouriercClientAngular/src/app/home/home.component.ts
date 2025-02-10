@@ -56,19 +56,5 @@ export class HomeComponent implements OnInit {
 
     isModalOpen = true;
 
-    // Fetch branches from API
-  //     getBranches(): void {
-  //       this.httpClient.get<any>(`${this.authService.baseURL}/api/Branches`,
-  //       ).subscribe({
-  //         next: (response) => {
-  //           if (response) {
-  //             this.listBranchs = response;
-            
-              
-  //        console.log(this.listBranchs)
-  //         }
-  //       }
-  //       });
-  //     }
-   
+
    }
