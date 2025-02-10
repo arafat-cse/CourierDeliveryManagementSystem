@@ -43,7 +43,7 @@ namespace WebCourierAPI.Controllers
         }
 
         // PUT: api/Parcels/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+       
         [HttpPut("{id}")]
         public async Task<IActionResult> PutParcel(int id, Parcel parcel)
         {
@@ -76,16 +76,16 @@ namespace WebCourierAPI.Controllers
         }
 
         // POST: api/Parcels
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+       
         [HttpPost]
         public async Task<ActionResult<Parcel>> PostParcel(Parcel parcel)
         {
             WebCorierApiContext _context = new WebCorierApiContext();
-           // ইউনিক Tracking Code জেনারেট করা হচ্ছে
+           
             parcel.TrackingCode = TrackingCodeGenerator.GenerateUniqueTrackingCode(_context);
 
             _context.Parcels.Add(parcel);
-            // এখানে ব্রেকপয়েন্ট দিন এবং parcel.TrackingCode দেখুন
+            
             Console.WriteLine($"Generated Tracking Code: {parcel.TrackingCode}");
             await _context.SaveChangesAsync();
 
@@ -121,7 +121,6 @@ namespace WebCourierAPI.Controllers
         {
             WebCorierApiContext _context = new WebCorierApiContext();
 
-            // নির্দিষ্ট Parcel খুঁজে বের করুন
             var parcel = await _context.Parcels.FindAsync(id);
 
             if (parcel == null)
@@ -129,9 +128,9 @@ namespace WebCourierAPI.Controllers
                 return NotFound("Parcel not found.");
             }
 
-            // Status ফিল্ড আপডেট করা হচ্ছে
+           
             parcel.Status = status;
-            parcel.UpdateDate = DateTime.UtcNow; // আপডেট টাইম সেট করা হচ্ছে
+            parcel.UpdateDate = DateTime.UtcNow; 
 
             _context.Entry(parcel).State = EntityState.Modified;
 

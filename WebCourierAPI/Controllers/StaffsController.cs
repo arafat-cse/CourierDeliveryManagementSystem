@@ -43,53 +43,7 @@ namespace WebCourierAPI.Controllers
             return staff;
         }
 
-        // PUT: api/Staffs/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        //[HttpPut("{id}")]
-        //public async Task<IActionResult> PutStaff(int id, Staff staff)
-        //{
-        //    WebCorierApiContext _context = new WebCorierApiContext();
-        //    if (id != staff.StaffId)
-        //    {
-        //        return BadRequest("Mismatched staff ID.");
-        //    }
-        //    var staffexists = await _context.Staffs.FindAsync(id);
-        //    if (staffexists == null)
-        //    {
-        //        return NotFound("staff not found.");
-        //    }
-        //    var token = Request.Headers["Token"].FirstOrDefault();
-        //    var user = AuthenticationHelper.ValidateToken(token);
-
-        //    if (user == null)
-        //    {
-        //        return Unauthorized("Invalid or expired token.");
-        //    }
-        //    staffexists.StaffName = staff.StaffName;
-        //    staffexists.CreateBy = user.UserName;
-        //    staffexists.CreateDate = DateTime.UtcNow;
-        //    staffexists.IsActive = staffexists.IsActive;
-
-        //    _context.Entry(staff).State = EntityState.Modified;
-
-        //    try
-        //    {
-        //        await _context.SaveChangesAsync();
-        //    }
-        //    catch (DbUpdateConcurrencyException)
-        //    {
-        //        if (!StaffExists(id))
-        //        {
-        //            return NotFound();
-        //        }
-        //        else
-        //        {
-        //            throw;
-        //        }
-        //    }
-
-        //    return NoContent();
-        //}
+        
 
         [HttpPut("{id}")]
         public async Task<IActionResult> PutStaff(int id, Staff staff)
@@ -148,7 +102,7 @@ namespace WebCourierAPI.Controllers
             return NoContent();
         }
         // POST: api/Staffs
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+      
         [HttpPost]
         public async Task<ActionResult<Staff>> PostStaff(Staff staff)
         {
